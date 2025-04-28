@@ -10,9 +10,10 @@ const { generatePdf } = require('../utils/pdfGenerator');
 
 const router = express.Router();
 
-const UPLOADS_DIR = path.join(__dirname, '..', 'uploads');
-const GENERATED_PDFS_DIR = path.join(__dirname, '..', 'generated_pdfs');
-const TEMP_DIR = path.join(__dirname, '..', 'temp');
+// Vercel için geçici dosya yollarını /tmp altına taşıyoruz
+const UPLOADS_DIR = process.env.VERCEL ? '/tmp/uploads' : path.join(__dirname, '..', 'uploads');
+const GENERATED_PDFS_DIR = process.env.VERCEL ? '/tmp/generated_pdfs' : path.join(__dirname, '..', 'generated_pdfs');
+const TEMP_DIR = process.env.VERCEL ? '/tmp/temp' : path.join(__dirname, '..', 'temp');
 
 // --- Kabul Edilen Türler ---
 const ALLOWED_MIME_TYPES = [
